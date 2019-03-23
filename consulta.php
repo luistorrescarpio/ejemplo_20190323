@@ -5,8 +5,8 @@ $obj = (object)$_REQUEST;
 
 switch ($obj->action) {
 	case 'subirArchivo':
-		savefile64("archivo", $obj->file64);
-		echo "Proceso finalizado";
+		$fileName = savefile64("archivo", $obj->file64);
+		echo "Proceso finalizado. ".$fileName;
 		break;
 
 	case 'action2':
