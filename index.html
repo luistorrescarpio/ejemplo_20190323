@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ejemplo 4</title>
+	<script src="jquery-1.9.1.min.js"></script>
+	<script src="lt_script/tofile64.js"></script>
+</head>
+<body>
+	<input type="file" id="fileContent" onchange="prepararArchivo()">
+	<button onclick="enviarArchivo();">Enviar</button>
+	
+	<img src="" id="previewImg">
+
+	<script>
+		var file64 = null;
+		function prepararArchivo(){
+			tofile64("fileContent",function(res){
+				console.log(res);
+				$("#previewImg").attr("src",res.content);
+				file64 = res.data;
+			});
+		}
+
+		function enviarArchivo(){
+			$.post("consulta.php",{
+				action: "subirArchivo"
+				,file64: file64
+			},function(res){
+				console.log(res);
+			});
+		}
+	</script>
+</body>
+</html>
